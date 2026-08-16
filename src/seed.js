@@ -177,7 +177,7 @@ const run = async () => {
       xpReward: 20,
       unlockRequirement: 50,
       content: { instructions: 'Listen and identify numbers and time expressions in Russian.' },
-      vocabulary: [],
+      vocabulary: ruVocabDocs.slice(0, 10).map((v) => v._id),
     },
     {
       lessonPath: ruPathId,
@@ -283,7 +283,7 @@ const run = async () => {
       xpReward: 20,
       unlockRequirement: 100,
       content: { instructions: 'Listen and identify numbers and time expressions in English.' },
-      vocabulary: [],
+      vocabulary: enVocabDocs.slice(0, 10).map((v) => v._id),
     },
     {
       lessonPath: enPathId,

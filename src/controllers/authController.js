@@ -23,6 +23,14 @@ export const register = async (req, res, next) => {
       name: user.name,
       email: user.email,
       role: user.role,
+      nativeLanguage: user.nativeLanguage,
+      targetLanguage: user.targetLanguage,
+      onboardingCompleted: user.onboardingCompleted,
+      xp: user.xp,
+      streak: user.streak,
+      league: user.league,
+      level: user.level,
+      createdAt: user.createdAt,
       token: generateToken(user._id),
     });
   } catch (err) {
@@ -51,6 +59,14 @@ export const login = async (req, res, next) => {
       name: user.name,
       email: user.email,
       role: user.role,
+      nativeLanguage: user.nativeLanguage,
+      targetLanguage: user.targetLanguage,
+      onboardingCompleted: user.onboardingCompleted,
+      xp: user.xp,
+      streak: user.streak,
+      league: user.league,
+      level: user.level,
+      createdAt: user.createdAt,
       token: generateToken(user._id),
     });
   } catch (err) {
