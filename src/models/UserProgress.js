@@ -1,23 +1,23 @@
 import mongoose from 'mongoose';
 
-// TODO: tracks a single user's completion state for a single lesson
-// (score, attempts, xpEarned). One document per user+lesson pair.
+// Tracks a single user's completion of a single lesson (one document per
+// completion — a user may complete the same lesson more than once).
 const userProgressSchema = new mongoose.Schema({
-  user: {
+  userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true,
   },
-  lesson: {
+  lessonId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Lesson',
     required: true,
   },
-  completed: {
-    type: Boolean,
-    default: false,
+  completedAt: {
+    type: Date,
+    default: Date.now,
   },
-  score: {
+  accuracy: {
     type: Number,
     default: 0,
   },
@@ -25,12 +25,9 @@ const userProgressSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
-  attempts: {
+  mistakeCount: {
     type: Number,
     default: 0,
-  },
-  completedAt: {
-    type: Date,
   },
   createdAt: {
     type: Date,

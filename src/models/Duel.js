@@ -1,32 +1,37 @@
 import mongoose from 'mongoose';
 
-// TODO: a Duel is a real-time 1v1 challenge between two users, driven by
-// sockets/duel.js. status tracks the lifecycle; results is filled in once
-// the duel finishes.
+// A Duel is a real-time 1v1 challenge between two users, driven by
+// sockets/duel.js. status tracks the lifecycle; scores/winnerId are filled
+// in as the duel is played and once it finishes.
 const duelSchema = new mongoose.Schema({
-  challenger: {
+  challengerId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true,
   },
-  opponent: {
+  opponentId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true,
+  },
+  questionSet: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Vocabulary',
+    },
+  ],
+  scores: {
+    challenger: { type: Number, default: 0 },
+    opponent: { type: Number, default: 0 },
   },
   status: {
     type: String,
-    enum: ['pending', 'active', 'completed', 'cancelled'],
+    enum: ['pending', 'active', 'completed'],
     default: 'pending',
   },
-  lesson: {
+  winnerId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Lesson',
-  },
-  results: {
-    challengerScore: { type: Number, default: 0 },
-    opponentScore: { type: Number, default: 0 },
-    winner: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    ref: 'User',
   },
   createdAt: {
     type: Date,

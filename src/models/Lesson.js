@@ -1,8 +1,9 @@
 import mongoose from 'mongoose';
 
-// TODO: a Lesson belongs to a LessonPath. type distinguishes a standard
-// vocab/exercise lesson from a full dialog lesson. content shape is left
-// flexible (Mixed) until the exercise format is finalized.
+// A Lesson belongs to a LessonPath. type distinguishes a vocabulary drill
+// from a full dialog lesson, a listening exercise, or a speed round.
+// content shape depends on type — for 'dialog' it is:
+//   { scenario, scenes: [{ speakerLine, translations: {uz,ru,en}, replyOptions: [{text, isCorrect}] }] }
 const lessonSchema = new mongoose.Schema({
   lessonPath: {
     type: mongoose.Schema.Types.ObjectId,
@@ -16,8 +17,8 @@ const lessonSchema = new mongoose.Schema({
   },
   type: {
     type: String,
-    enum: ['standard', 'dialog', 'speed-round'],
-    default: 'standard',
+    enum: ['dialog', 'vocabulary', 'listening', 'speed_round'],
+    default: 'vocabulary',
   },
   order: {
     type: Number,
@@ -26,6 +27,10 @@ const lessonSchema = new mongoose.Schema({
   xpReward: {
     type: Number,
     default: 10,
+  },
+  unlockRequirement: {
+    type: Number,
+    default: 0,
   },
   content: {
     type: mongoose.Schema.Types.Mixed,

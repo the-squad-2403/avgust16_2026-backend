@@ -1,30 +1,25 @@
 import mongoose from 'mongoose';
 
-// TODO: a Vocabulary entry is a single word/phrase pair for a given
-// nativeLanguage -> targetLanguage direction, optionally tagged to a Lesson.
+// A Vocabulary entry is a single word/concept with translations into every
+// supported language, so the same entry can serve any language-pair path.
 const vocabularySchema = new mongoose.Schema({
-  nativeLanguage: {
-    type: String,
-    enum: ['uz', 'ru', 'en'],
-    required: true,
-  },
-  targetLanguage: {
-    type: String,
-    enum: ['uz', 'ru', 'en'],
-    required: true,
-  },
-  nativeWord: {
+  word: {
     type: String,
     required: true,
     trim: true,
   },
-  targetWord: {
+  translations: {
+    uz: { type: String, required: true },
+    ru: { type: String, required: true },
+    en: { type: String, required: true },
+  },
+  exampleSentence: {
     type: String,
-    required: true,
     trim: true,
   },
   audioUrl: {
     type: String,
+    default: '',
   },
   lesson: {
     type: mongoose.Schema.Types.ObjectId,

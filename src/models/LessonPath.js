@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
-// TODO: a LessonPath groups an ordered sequence of Lessons for a given
-// nativeLanguage -> targetLanguage pair (e.g. ru -> en path with 5 lessons).
+// A LessonPath groups an ordered sequence of Lessons for a given
+// nativeLanguage -> targetLanguage pair (e.g. uz -> ru path with 5 lessons).
 const lessonPathSchema = new mongoose.Schema({
   title: {
     type: String,
@@ -11,12 +11,20 @@ const lessonPathSchema = new mongoose.Schema({
   nativeLanguage: {
     type: String,
     enum: ['uz', 'ru', 'en'],
-    required: true,
+    default: 'uz',
   },
   targetLanguage: {
     type: String,
     enum: ['uz', 'ru', 'en'],
     required: true,
+  },
+  iconType: {
+    type: String,
+    default: 'default',
+  },
+  unlockRequirement: {
+    type: Number,
+    default: 0,
   },
   lessons: [
     {
