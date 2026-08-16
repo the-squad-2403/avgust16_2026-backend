@@ -58,6 +58,11 @@ export const login = async (req, res, next) => {
   }
 };
 
+export const completeOnboarding = async (req, res, next) => {
+  // TODO: implement - set nativeLanguage/targetLanguage and onboardingCompleted on req.user
+  res.status(501).json({ message: 'Not implemented' });
+};
+
 export const getMe = async (req, res, next) => {
   try {
     res.status(200).json({
